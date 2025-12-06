@@ -1,0 +1,1 @@
+Solution to puzzle 2, written in Go

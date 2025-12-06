@@ -1,0 +1,1 @@
+Solution to puzzle 1, written in Rust
