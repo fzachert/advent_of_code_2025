@@ -1,0 +1,1 @@
+Solution to puzzle 3, written in Haskel
