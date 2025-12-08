@@ -1,0 +1,1 @@
+Solution to puzzle 5, written in Basic. Using yabasic 2.90.2
