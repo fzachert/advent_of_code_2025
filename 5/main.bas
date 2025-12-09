@@ -12,8 +12,6 @@ WHILE NOT EOF(1)
 
     IF LEN(line$) = 0 THEN
         RANGESFINISHED = TRUE
-        PRINT "Ranges finished."
-        REM printmatrix(ranges())
         CONTINUE
     END IF
 
@@ -43,14 +41,68 @@ WEND
 CLOSE #1
 PRINT "Total numbers within ranges: ", numberWithinRange
 
-sub printmatrix(ar())
-  local x,y,p,q
-  x=arraysize(ar(),1)
-  y=arraysize(ar(),2)
-  for q=0 to y
-    for p=0 to x
-      print ar(p,q),"\t";
-    next p
-    print
-  next q
-end sub
+combinedCount = combineOverlapsLoop(ranges(), numRanges)
+
+LET totalRange = 0
+FOR i = 0 TO combinedCount - 1
+    totalRange = totalRange + (ranges(i, 1) - ranges(i, 0) + 1)
+NEXT i
+PRINT "Total range covered: ", totalRange USING "####################"
+
+SUB combineOverlapsLoop(ranges(), numRanges)
+    DIM combinedRanges(1000,2)
+    LET combinedCount = 2
+    while TRUE
+
+        LET prevCount = combinedCount
+        combinedCount = combineOverlaps(ranges(), numRanges, combinedRanges())
+
+        FOR i = 0 TO combinedCount - 1
+            ranges(i, 0) = combinedRanges(i, 0)
+            ranges(i, 1) = combinedRanges(i, 1)
+        NEXT i
+        numRanges = combinedCount
+
+        IF combinedCount = prevCount THEN
+            BREAK
+        END IF
+    WEND
+    RETURN combinedCount
+END SUB
+
+SUB combineOverlaps(ranges(), numRanges, combinedRanges())
+    LOCAL wasMerged(1000)
+    combinedCount = 0
+
+    FOR i = 0 TO numRanges - 1
+        IF wasMerged(i) THEN
+            CONTINUE
+        END IF
+
+        LET hasOverlap = FALSE
+        FOR j = i + 1 TO numRanges - 1
+            IF wasMerged(j) THEN
+                CONTINUE
+            END IF
+
+            REM Check for overlap
+            IF NOT (ranges(i, 1) < ranges(j, 0) OR ranges(j, 1) < ranges(i, 0)) THEN
+                REM There is an overlap
+                combinedStart = MIN(ranges(i, 0), ranges(j, 0))
+                combinedEnd = MAX(ranges(i, 1), ranges(j, 1))
+                combinedRanges(combinedCount, 0) = combinedStart
+                combinedRanges(combinedCount, 1) = combinedEnd
+                combinedCount = combinedCount + 1
+                hasOverlap = TRUE
+                wasMerged(j) = TRUE
+                BREAK
+            END IF
+        NEXT j
+        IF NOT hasOverlap THEN
+            combinedRanges(combinedCount, 0) = ranges(i, 0)
+            combinedRanges(combinedCount, 1) = ranges(i, 1)
+            combinedCount = combinedCount + 1
+        END IF
+    NEXT i
+    RETURN combinedCount
+END SUB

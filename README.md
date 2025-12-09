@@ -5,4 +5,4 @@ Coding solutions for the [Advent of Code 2025](https://adventofcode.com/2025), e
 - Solution 2 (Go)
 - Solution 3 (Haskell)
 - Solution 4 (Ruby)
-- Solution 5 (Basic)(WIP)
+- Solution 5 (Basic)
