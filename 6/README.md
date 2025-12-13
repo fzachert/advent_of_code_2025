@@ -1,0 +1,1 @@
+Solution to puzzle 6, written in Octave. Using octave 6.4.0
