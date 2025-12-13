@@ -7,3 +7,4 @@ Coding solutions for the [Advent of Code 2025](https://adventofcode.com/2025), e
 - Solution 4 (Ruby)
 - Solution 5 (Basic)
 - Solution 6 (Octave)
+- Solution 7 (C++)

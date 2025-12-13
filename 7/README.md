@@ -1,0 +1,1 @@
+Solution to puzzle 7, written in c++
