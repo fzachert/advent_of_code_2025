@@ -1,0 +1,1 @@
+Solution to puzzle 8, written in Lua (using Lua5.4)
