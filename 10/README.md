@@ -1,0 +1,1 @@
+Solution to puzzle 10, written in Python (only Part1)

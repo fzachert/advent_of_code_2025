@@ -10,3 +10,5 @@ Coding solutions for the [Advent of Code 2025](https://adventofcode.com/2025), e
 - Solution 7 (C++)
 - Solution 8 (Lua)
 - Solution 9 (C)(WIP)
+- Solution 10 (Python)(WIP)
+- Solution 11 (Elixir)(WIP)
